@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BARBER by amado — Brand System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.460.0/lucide.min.js"></script>
+<style>
+  :root{
+    /* Farbe — Amado (nur Dark) */
+    --bg:#000000; --surface:#141414; --overlay:#1E1E1E;
+    --border:#2A2A2A; --border-strong:#4A4A4A;
+    --ink:#F5F2ED; --muted:#A8A29A; --faint:#8A857D;
+    --accent:#EE8B3D; --accent-lift:#F5A05C; --accent-hover:#FFA24E; --accent-ink:#0A0A0A;
+    --ok:#3DCE7A; --warn:#F5C451; --err:#FF6B6B; --focus:#EE8B3D;
+    /* Raum */
+    --s-3xs:.125rem;--s-2xs:.25rem;--s-xs:.5rem;--s-sm:.75rem;--s-md:1rem;--s-lg:1.5rem;--s-xl:2rem;--s-2xl:3rem;
+    --s-3xl:clamp(2.5rem,6vw,4rem);--s-4xl:clamp(3rem,8vw,6rem);--s-5xl:clamp(3.5rem,10vw,8rem);
+    --r-xs:3px;--r-sm:6px;--r-md:8px;--r-pill:999px;
+    --ctl-h:2.75rem;--ctl-h-lg:3.25rem;--tap:44px;--wrap:73.75rem;--gutter:clamp(1.25rem,4vw,3.5rem);
+    --icon:20px;--icon-sm:16px;
+    /* Bewegung */
+    --t-sofort:80ms;--t-fast:150ms;--t-base:240ms;--t-slow:480ms;--ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+  .disp{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:.92;letter-spacing:.005em;font-weight:400}
+  h2.sec{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(28px,6vw,56px);line-height:.95;margin:0}
+  h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-weight:400;letter-spacing:.01em;font-size:clamp(17px,2.4vw,22px);margin:0 0 var(--s-sm);color:var(--ink)}
+  p{margin:0 0 var(--s-md);max-width:70ch;color:var(--muted)}
+  a{color:var(--accent)}
+  code{background:var(--overlay);color:var(--ink);padding:1px 6px;border-radius:var(--r-xs);font-size:.85em;font-family:ui-monospace,monospace}
+  section{padding:var(--s-4xl) 0;border-top:1px solid var(--border)}
+  .eyebrow{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);font-size:13px}
+  .sec-head{display:flex;align-items:baseline;gap:var(--s-md);margin-bottom:var(--s-xl);flex-wrap:wrap}
+  .sec-head .num{font-family:'Anton';color:var(--border-strong);font-size:clamp(28px,6vw,56px);line-height:.95}
+  .grid{display:grid;gap:var(--s-md)}
+  .lead{color:var(--ink);font-size:clamp(16px,2.2vw,19px);max-width:62ch}
+  .rule{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r-sm);padding:var(--s-md) var(--s-lg);margin:var(--s-md) 0;color:var(--muted);font-size:14px}
+  .rule b{color:var(--accent)}
+  .tag{display:inline-flex;align-items:center;gap:6px;background:var(--overlay);border:1px solid var(--border);color:var(--muted);font-size:12px;padding:3px 10px;border-radius:var(--r-pill)}
+  .two{grid-template-columns:1fr;gap:var(--s-xl)}
+  @media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+
+  /* Cover */
+  .cover{min-height:88vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;border-top:0}
+  .cover .igrid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;opacity:.35;mask-image:radial-gradient(circle at 30% 40%,#000,transparent 70%)}
+  .cover h1{position:relative;font-size:clamp(52px,16vw,180px)}
+  .cover h1 em{font-style:normal;color:var(--accent)}
+  .cover .meta{position:relative;color:var(--muted);display:flex;gap:var(--s-lg);flex-wrap:wrap;margin-top:var(--s-md);font-size:14px}
+  .cover .meta i{color:var(--accent)}
+
+  /* swatches */
+  .sw{border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;background:var(--surface)}
+  .sw .chip{height:84px;display:flex;align-items:flex-end;justify-content:space-between;padding:8px 10px;font-size:12px}
+  .sw .m{padding:8px 11px;font-size:12px}
+  .sw .m .hex{font-family:ui-monospace,monospace;color:var(--ink);text-transform:uppercase}
+  .sw .m .nm{color:var(--muted)}
+  .badge{font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:var(--r-pill)}
+  .pass{background:#0f3d20;color:#7CF0A0}.aa{background:#3d3312;color:#F5C451}.fail{background:#4a1515;color:#FF8A8A}
+  .cards{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+
+  /* buttons */
+  .btn{font-family:Inter;font-weight:700;letter-spacing:.02em;border-radius:var(--r-sm);height:var(--ctl-h);padding:0 var(--s-lg);display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer;transition:background var(--t-sofort) var(--ease),border-color var(--t-fast) var(--ease),transform var(--t-fast) var(--ease);font-size:15px;text-decoration:none}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:linear-gradient(180deg,var(--accent-lift),var(--accent));color:var(--accent-ink)}
+  .btn-primary:hover{background:linear-gradient(180deg,var(--accent-hover),var(--accent-lift))}
+  .btn-ghost{background:transparent;border-color:var(--border-strong);color:var(--ink)}
+  .btn-ghost:hover{background:var(--overlay)}
+  .btn-lg{height:var(--ctl-h-lg);font-size:16px;padding:0 var(--s-xl)}
+  .btn i{width:var(--icon);height:var(--icon)}
+  .neon{box-shadow:0 0 0 1px var(--accent),0 0 18px -2px var(--accent)}
+  .btn:focus-visible,input:focus-visible,select:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--focus)}
+
+  /* form */
+  .field{display:block;margin-bottom:var(--s-md)}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+  .field input,.field select{width:100%;height:var(--ctl-h);background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--ink);padding:0 var(--s-md);font-family:Inter;font-size:15px}
+  .field input::placeholder{color:var(--faint)}
+  .field input:focus,.field select:focus{border-color:var(--accent)}
+  .field.bad input{border-color:var(--err)}
+  .err-msg{color:var(--err);font-size:13px;margin-top:5px;display:none}
+  .field.bad .err-msg{display:block}
+
+  /* service tiles */
+  .tiles{grid-template-columns:1fr;gap:var(--s-md)}
+  @media(min-width:680px){.tiles{grid-template-columns:repeat(3,1fr)}}
+  .tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:var(--s-lg);transition:border-color var(--t-fast) var(--ease),transform var(--t-fast) var(--ease)}
+  .tile:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .tile .ic{color:var(--accent);margin-bottom:var(--s-sm)}
+  .tile .ic i{width:28px;height:28px}
+  .tile h4{font-family:'Anton';text-transform:uppercase;font-weight:400;font-size:19px;margin:0 0 4px}
+  .tile .meta{color:var(--muted);font-size:13px}
+  .tile .price{color:var(--accent);font-family:'Anton';font-size:22px;margin-top:var(--s-sm)}
+  details.more{margin-top:var(--s-md)}
+  details.more summary{cursor:pointer;color:var(--accent);font-size:14px;list-style:none;display:inline-flex;gap:6px;align-items:center}
+  details.more summary i{width:16px;height:16px;transition:transform var(--t-fast)}
+  details.more[open] summary i{transform:rotate(180deg)}
+
+  /* motion table */
+  table.m{width:100%;border-collapse:collapse;font-size:14px}
+  table.m th,table.m td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  table.m th{color:var(--accent);font-family:'Anton';font-weight:400;text-transform:uppercase;font-size:13px;letter-spacing:.05em}
+  table.m td:first-child{color:var(--ink);white-space:nowrap;font-weight:500}
+  table.m .where{color:var(--faint)}
+
+  /* applications */
+  .card-mock{aspect-ratio:1.75;background:#0A0A0A;border:1px solid var(--border);border-radius:var(--r-md);padding:var(--s-lg);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+  .card-mock .lg{font-family:'Anton';text-transform:uppercase;font-size:clamp(20px,4vw,30px);line-height:.95}
+  .card-mock .lg em{font-style:normal;color:var(--accent)}
+  .card-mock .det{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+  .card-mock .det i{color:var(--accent);width:13px;height:13px;vertical-align:-2px;margin-right:5px}
+  .ig{aspect-ratio:1;background:#000;border:1px solid var(--border);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:var(--s-lg)}
+  .ig .big{font-family:'Anton';text-transform:uppercase;font-size:clamp(22px,5vw,34px);line-height:.95}
+  .ig .big em{font-style:normal;color:var(--accent)}
+  .ig .tagline{color:var(--muted);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+  .gadget{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:var(--s-md)}
+  .gadget i{color:var(--accent);width:22px;height:22px;flex:none}
+  .gadget b{color:var(--ink);font-weight:500}
+  .gadget span{color:var(--muted);font-size:13px}
+
+  .marquee{overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:var(--s-sm) 0}
+  .marquee span{display:inline-block;font-family:'Anton';text-transform:uppercase;font-size:28px;color:var(--accent);animation:sc 20s linear infinite}
+  .marquee span b{color:var(--ink);font-weight:400;margin:0 14px}
+  @keyframes sc{to{transform:translateX(-50%)}}
+
+  .toc{position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10;padding:10px 0}
+  .toc .wrap{display:flex;gap:var(--s-md);overflow-x:auto;font-size:13px}
+  .toc a{color:var(--muted);text-decoration:none;white-space:nowrap}
+  .toc a:hover{color:var(--accent)}
+  .foot{color:var(--faint);font-size:13px;padding:var(--s-2xl) 0}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="toc"><div class="wrap">
+  <a href="#haltung">01 Haltung</a><a href="#logo">02 Logo</a><a href="#farbe">03 Farbe</a>
+  <a href="#schrift">04 Schrift</a><a href="#raum">05 Raum</a><a href="#icons">06 Icons</a>
+  <a href="#bewegung">07 Bewegung</a><a href="#komponenten">08 Komponenten</a>
+  <a href="#sprache">09 Sprache</a><a href="#foto">10 Fotografie</a><a href="#anwendung">11 Anwendungen</a>
+</div></nav>
+
+<header class="cover"><div class="wrap">
+  <div class="igrid"></div>
+  <div class="eyebrow">Brand System · v0.1 · 2026</div>
+  <h1 class="disp">Barber<br><em>by amado</em></h1>
+  <div class="meta">
+    <span><i data-lucide="map-pin"></i> Bändlistrasse 29, Zürich</span>
+    <span><i data-lucide="star"></i> 5.0 aus 407</span>
+    <span><i data-lucide="scissors"></i> Best Barber in Town</span>
+  </div>
+</div></header>
+
+<!-- 01 -->
+<section id="haltung"><div class="wrap">
+  <div class="sec-head"><span class="num">01</span><h2 class="sec">Haltung</h2></div>
+  <p class="lead">Laut, direkt, frech. Ein Barber, der redet, der weiss was er kann, und der es zeigt.
+  Das Design verkörpert das: schwarze Fläche, ein lautes Orange, riesige Schrift, Bewegung mit Wumms.
+  Nie brav, nie generisch, nie nach Baukasten.</p>
+  <div class="two grid" style="margin-top:var(--s-lg)">
+    <div><h3>Dafür steht die Marke</h3>
+      <p>Handwerk auf Spitzenniveau (die 5.0 ist echt), persönlich und ohne Getue. Fades, Bart,
+      Nassrasur. Dazu das 1-on-1-Training für angehende Barber.</p></div>
+    <div><h3>So klingt sie</h3>
+      <p>Kurz, konkret, Du. „Sag mir, wo du stehst, dann richte ich den Tag danach aus." Kein
+      Marketing-Sprech, keine Floskeln. Fachwörter der Szene sind erwünscht.</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section id="logo"><div class="wrap">
+  <div class="sec-head"><span class="num">02</span><h2 class="sec">Logo</h2></div>
+  <div class="two grid">
+    <div>
+      <div style="background:#000;border:1px solid var(--border);border-radius:var(--r-md);padding:var(--s-2xl);display:flex;align-items:center;justify-content:center;min-height:180px">
+        <div style="text-align:center"><div class="disp" style="font-size:40px">✕ Barber</div><div style="letter-spacing:.3em;color:var(--muted);font-size:11px;margin-top:4px">BY AMADO</div></div>
+      </div>
+      <p style="font-size:13px;margin-top:var(--s-sm)">Die gekreuzten Klingen („✕") plus Wortmarke. Original liegt in <code>assets/logo/</code>.</p>
+    </div>
+    <div>
+      <h3>Regeln</h3>
+      <ul style="color:var(--muted);font-size:14px;padding-left:1.1em">
+        <li>Immer genug Freiraum rundherum (mindestens die Höhe des „B").</li>
+        <li>Nur Orange auf Schwarz oder Weiss auf Schwarz. Nie Orange auf Weiss.</li>
+        <li>Nicht verzerren, nicht kippen, keine Schatten, keine zweite Farbe.</li>
+      </ul>
+      <div class="rule"><b>Favicon / App-Icon:</b> fehlt bisher. Wird neu aus dem „✕" gebaut,
+      orange auf schwarz, als <code>.ico</code>, <code>.svg</code> und 512px-PNG.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 03 -->
+<section id="farbe"><div class="wrap">
+  <div class="sec-head"><span class="num">03</span><h2 class="sec">Farbe</h2></div>
+  <p class="lead">Dark Mode, ein einziger Akzent. <b style="color:var(--accent)">Farbe nur, wenn sie etwas
+  bedeutet</b> — Orange markiert Aktion und Zustand, nicht Deko. Kontraste unten sind live gemessen (WCAG).</p>
+  <div class="grid cards" id="tokens" style="margin-top:var(--s-lg)"></div>
+  <div class="rule"><b>Die wichtigste Regel:</b> Auf dem Orange sitzt dunkle Schrift
+  (<code>--accent-ink</code>), nie weisse. Weisse Schrift auf Orange misst ~2.5:1 und fällt durch —
+  das war der Fehler der alten Seite.</div>
+</div></section>
+
+<!-- 04 -->
+<section id="schrift"><div class="wrap">
+  <div class="sec-head"><span class="num">04</span><h2 class="sec">Schrift</h2></div>
+  <div class="two grid">
+    <div><h3>Anton — Display</h3>
+      <div class="disp" style="font-size:clamp(40px,9vw,80px)">Sharp <span style="color:var(--accent)">Cuts</span></div>
+      <p style="margin-top:var(--s-sm)">Nur für Headlines und grosse Aussagen. Immer Grossbuchstaben,
+      eng gesetzt. Das ist der Wumms.</p></div>
+    <div><h3>Inter — Lesen</h3>
+      <p style="color:var(--ink);font-size:17px">Präzise Haarschnitte, professionelle Bartpflege und
+      persönliche Beratung in mehreren Sprachen.</p>
+      <p>Alles ausser Headlines: Fliesstext, Preise, Formulare, Navigation. Gewichte 400 / 500 / 700.</p></div>
+  </div>
+  <h3 style="margin-top:var(--s-xl)">Grössenskala</h3>
+  <div class="grid" style="gap:6px">
+    <div class="disp" style="font-size:clamp(34px,8vw,64px)">Display 5xl</div>
+    <div class="disp" style="font-size:clamp(26px,5vw,42px)">Überschrift 3xl</div>
+    <div style="font-size:21px;font-weight:700">Lead / 700</div>
+    <div style="font-size:15px;color:var(--muted)">Fliesstext / 400 · 15px · Zeilenhöhe 1.62</div>
+    <div style="font-size:13px;color:var(--faint)">Klein / Meta / 13px</div>
+  </div>
+</div></section>
+
+<!-- 05 -->
+<section id="raum"><div class="wrap">
+  <div class="sec-head"><span class="num">05</span><h2 class="sec">Raum &amp; Raster</h2></div>
+  <p class="lead">Bewährte Abstandsskala. Kleine Abstände sind fest (sie sitzen an
+  Bedienelementen), die drei grossen wachsen mit dem Fenster. Mobile first, Desktop gleicher Wumms.</p>
+  <div class="grid" id="spaces" style="margin-top:var(--s-lg);gap:8px"></div>
+  <div class="two grid" style="margin-top:var(--s-xl)">
+    <div><h3>Masse</h3><ul style="color:var(--muted);font-size:14px;padding-left:1.1em">
+      <li>Inhaltsbreite <code>73.75rem</code>, Seitenrand <code>clamp(1.25rem, 4vw, 3.5rem)</code></li>
+      <li>Bedienhöhe <code>2.75rem</code>, Touchziel min. <code>44px</code></li>
+      <li>Radius Knopf <code>6px</code> (von dir), Karte <code>8px</code>, keine Pille für Knöpfe</li>
+    </ul></div>
+    <div><h3>Umbruchpunkte</h3><ul style="color:var(--muted);font-size:14px;padding-left:1.1em">
+      <li>sm 560 · md 720 · lg 900 · xl 1024</li>
+      <li>Tiefe über Fläche und Kante, nicht über Schatten (Ausnahme: der orange Glow als Signatur).</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- 06 -->
+<section id="icons"><div class="wrap">
+  <div class="sec-head"><span class="num">06</span><h2 class="sec">Icons</h2></div>
+  <div class="rule"><b>Regel:</b> Eine Familie, Stil „Minimalistic" von <a href="https://animatedicons.co">animatedicons.co</a>
+  (gratis, kommerziell, ohne Attribution, als Lottie/SVG selbst gehostet). <b>Animiert</b> nur an Signatur-Stellen,
+  <b>statisches SVG</b> überall sonst. <a href="https://lucide.dev">Lucide</a> als Fallback. Keine Emojis — nirgends.
+  <br><span style="color:var(--faint)">Die Symbole unten stehen als Platzhalter für die Familie.</span></div>
+  <div style="display:flex;gap:var(--s-lg);flex-wrap:wrap;color:var(--accent);margin-top:var(--s-md)">
+    <i data-lucide="scissors" style="width:32px;height:32px"></i>
+    <i data-lucide="calendar-check" style="width:32px;height:32px"></i>
+    <i data-lucide="map-pin" style="width:32px;height:32px"></i>
+    <i data-lucide="clock" style="width:32px;height:32px"></i>
+    <i data-lucide="star" style="width:32px;height:32px"></i>
+    <i data-lucide="phone" style="width:32px;height:32px"></i>
+    <i data-lucide="instagram" style="width:32px;height:32px"></i>
+    <i data-lucide="sparkles" style="width:32px;height:32px"></i>
+  </div>
+  <p style="margin-top:var(--s-md)">Grössen über Tokens: <code>--icon</code> 20px inline, <code>--icon-sm</code> 16px,
+  dekorativ bis 32px. Einheitliche Strichstärke, Farbe erbt vom Text (meist Orange oder Weiss).</p>
+</div></section>
+
+<!-- 07 -->
+<section id="bewegung"><div class="wrap">
+  <div class="sec-head"><span class="num">07</span><h2 class="sec">Bewegung</h2></div>
+  <p class="lead">Mit Absicht, nicht als Deko. Bewährte Zeiten. <code>prefers-reduced-motion</code>
+  schaltet alles ab. <b style="color:var(--accent)">Regel: höchstens ein Signatur-Effekt pro Abschnitt</b>,
+  sonst wird die Seite zur Demo-Show.</p>
+  <h3 style="margin-top:var(--s-lg)">Zeiten</h3>
+  <div style="display:flex;gap:var(--s-lg);flex-wrap:wrap;font-size:14px;color:var(--muted)">
+    <span class="tag">80ms Hover-Farbe</span><span class="tag">150ms Zustandswechsel</span>
+    <span class="tag">240ms Basis</span><span class="tag">480ms Auftritt</span>
+    <span class="tag">ease (.2,.7,.2,1)</span>
+  </div>
+  <h3 style="margin-top:var(--s-xl)">Signatur-Effekte (aus OriginKit, in Vanilla nachgebaut)</h3>
+  <p>Deine acht Wunsch-Elemente, jedes mit fester Rolle. OriginKit ist nur die optische Vorlage,
+  gebaut wird selbst — kein React.</p>
+  <table class="m">
+    <tr><th>Effekt</th><th>Rolle</th><th>Wo</th></tr>
+    <tr><td>light-shaft-text</td><td>der grosse Name beim Laden, Lichtstrahlen dahinter</td><td class="where">Hero, einmal</td></tr>
+    <tr><td>vector-wordmark</td><td>Logo zeichnet sich beim Auftritt</td><td class="where">Hero / Footer</td></tr>
+    <tr><td>interactive-grid</td><td>feines Raster im Hintergrund, folgt der Maus</td><td class="where">Hero dezent</td></tr>
+    <tr><td>rolling-letters</td><td>Buchstaben rollen beim Überfahren</td><td class="where">Titel, Navigation</td></tr>
+    <tr><td>text-carousel</td><td>Laufband mit Leistungsbegriffen</td><td class="where">Trenner</td></tr>
+    <tr><td>deck-carousel</td><td>Arbeiten durchblättern</td><td class="where">Galerie (Standard)</td></tr>
+    <tr><td>sphere-gallery-3d</td><td>optionales Showpiece der Cuts</td><td class="where">Galerie (Desktop, schwer)</td></tr>
+    <tr><td>neon-border</td><td>oranger Glow-Rahmen</td><td class="where">aktiver CTA, sparsam</td></tr>
+  </table>
+  <div class="rule"><b>Challenge:</b> Nicht alle acht gleichzeitig. Ich empfehle drei Signaturen zu führen
+  (Hero-Text, Galerie, CTA-Glow), die anderen dezent. Die 3D-Kugel ist die schwerste; auf dem Handy
+  reduziert oder durch das Deck ersetzt.</div>
+</div></section>
+
+<!-- 08 -->
+<section id="komponenten"><div class="wrap">
+  <div class="sec-head"><span class="num">08</span><h2 class="sec">Komponenten</h2></div>
+
+  <h3>Knöpfe / CTAs <span class="tag">Verhalten &amp; Radius</span></h3>
+  <div style="display:flex;gap:var(--s-md);flex-wrap:wrap;align-items:center;margin-bottom:var(--s-md)">
+    <a class="btn btn-primary btn-lg neon" href="#"><i data-lucide="calendar-check"></i> Jetzt buchen</a>
+    <a class="btn btn-primary" href="#">Book now</a>
+    <a class="btn btn-ghost" href="#"><i data-lucide="instagram"></i> Instagram</a>
+  </div>
+  <p style="font-size:14px">Primär: oranger Verlauf (<code>accent-lift → accent</code>) mit dunkler Schrift.
+  Pro Ansicht nur ein primärer Knopf, der Rest ist Ghost. Der Haupt-CTA „Jetzt buchen" trägt den Neon-Glow.
+  Hover 80ms, Druck 150ms, Fokusring zweifarbig.</p>
+
+  <h3 style="margin-top:var(--s-xl)">Formulare <span class="tag">Verhalten bewährt, Design in Amados Look</span></h3>
+  <div class="two grid">
+    <form onsubmit="return false" novalidate>
+      <div class="field"><label>Name</label><input placeholder="Vorname Nachname"></div>
+      <div class="field" id="mailf"><label>E-Mail</label><input id="mail" type="email" placeholder="name@mail.ch">
+        <div class="err-msg">Gib eine gültige E-Mail ein.</div></div>
+      <div class="field"><label>Leistung</label><select><option>Haarschnitt</option><option>Haar + Bart</option><option>Bart</option></select></div>
+      <button class="btn btn-primary" onclick="checkMail()"><i data-lucide="send"></i> Absenden</button>
+    </form>
+    <div>
+      <ul style="color:var(--muted);font-size:14px;padding-left:1.1em">
+        <li>Touchziel 44px, Bedienhöhe 2.75rem, Radius 6px.</li>
+        <li>Fokus macht die Kante orange plus Fokusring.</li>
+        <li>Fehler inline und sofort, rote Kante, Meldung darunter.</li>
+        <li>Platzhalter zeigt ein echtes Beispiel, nicht den Feldnamen.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:var(--s-xl)">Leistungen <span class="tag">max. 3 im Fokus</span></h3>
+  <p>Haarschnitt ist die Hauptleistung. Drei Kacheln sichtbar, der Rest erst auf Klick. Zu viel Auswahl verliert.</p>
+  <div class="grid tiles">
+    <div class="tile"><div class="ic"><i data-lucide="scissors"></i></div><h4>Haar + Styling</h4><div class="meta">45 Min.</div><div class="price">ab 50.–</div></div>
+    <div class="tile"><div class="ic"><i data-lucide="user-round"></i></div><h4>Haar + Bart</h4><div class="meta">75 Min.</div><div class="price">ab 75.–</div></div>
+    <div class="tile"><div class="ic"><i data-lucide="sparkles"></i></div><h4>Haar + Maske</h4><div class="meta">60 Min.</div><div class="price">ab 65.–</div></div>
+  </div>
+  <details class="more"><summary>Weitere Leistungen <i data-lucide="chevron-down"></i></summary>
+    <div class="grid tiles" style="margin-top:var(--s-md)">
+      <div class="tile"><h4>Haar + Bart + Maske</h4><div class="meta">90 Min.</div><div class="price">95.–</div></div>
+      <div class="tile"><h4>Kopfrasur + Bart</h4><div class="meta">45 Min.</div><div class="price">ab 50.–</div></div>
+      <div class="tile"><h4>Bart</h4><div class="meta">30 Min.</div><div class="price">ab 35.–</div></div>
+    </div>
+  </details>
+
+  <h3 style="margin-top:var(--s-xl)">Produkte <span class="tag">Karussell · nur vor Ort</span></h3>
+  <p>Ringkarussell (6 Karten) mit den Laden-Produkten, Titel und Preis, Hinweis „nur vor Ort erhältlich".</p>
+  <div class="grid tiles">
+    <div class="tile"><div class="ic"><i data-lucide="spray-can"></i></div><h4>Sea Salt Spray</h4><div class="meta">Uppercut Deluxe · nur vor Ort</div><div class="price">CHF –</div></div>
+    <div class="tile"><div class="ic"><i data-lucide="package"></i></div><h4>Featherweight</h4><div class="meta">Uppercut Deluxe · nur vor Ort</div><div class="price">CHF –</div></div>
+    <div class="tile"><div class="ic"><i data-lucide="scissors"></i></div><h4>…</h4><div class="meta">weitere</div><div class="price">CHF –</div></div>
+  </div>
+</div></section>
+
+<div class="marquee"><span id="mq"></span></div>
+
+<!-- 09 -->
+<section id="sprache"><div class="wrap">
+  <div class="sec-head"><span class="num">09</span><h2 class="sec">Sprache</h2></div>
+  <div class="two grid">
+    <div><h3>Tonalität</h3>
+      <p>Kurz, direkt, Du. Konkret statt vage. Englische Fachwörter (Fades, Taper, Blending, Hot Towel)
+      sind normal. Schweizer Hochdeutsch, „ss" statt „ß".</p>
+      <div class="rule"><b>Anti-KI-Regel:</b> Jeder Text, der nach aussen geht, läuft durch das
+      Anti-KI-Schreibsystem. Verboten: Gedankenstrich als Stilmittel, „nicht X, sondern Y",
+      Doppelpunkt-Ankündigungen, Dreiklänge, Floskeln. Erster und letzter Satz von Hand.</div>
+    </div>
+    <div><h3>Mehrsprachig</h3>
+      <p>Amado spricht fünf Sprachen. Die Seite wird i18n-fähig gebaut, vorerst nur Deutsch live,
+      der Rest als Platzhalter.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="tag" style="border-color:var(--accent);color:var(--accent)">DE live</span>
+        <span class="tag">EN</span><span class="tag">ES</span><span class="tag">PT</span><span class="tag">FR</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 10 -->
+<section id="foto"><div class="wrap">
+  <div class="sec-head"><span class="num">10</span><h2 class="sec">Fotografie</h2></div>
+  <p class="lead">Echte Cuts, echter Laden, keine Stockbilder. Dunkel, kontrastreich, Fokus auf Handwerk
+  und Gesicht. Schwarzer Grund lässt die Bilder leuchten. Material aus Instagram und Shop liegt in
+  <code>assets/</code>, hochauflösende Originale holen wir bei ihm.</p>
+  <div class="grid cards" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr))">
+    <div style="aspect-ratio:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--faint)"><i data-lucide="image"></i></div>
+    <div style="aspect-ratio:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--faint)"><i data-lucide="image"></i></div>
+    <div style="aspect-ratio:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--faint)"><i data-lucide="image"></i></div>
+    <div style="aspect-ratio:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--faint)"><i data-lucide="image"></i></div>
+  </div>
+</div></section>
+
+<!-- 11 -->
+<section id="anwendung"><div class="wrap">
+  <div class="sec-head"><span class="num">11</span><h2 class="sec">Anwendungen</h2></div>
+  <p class="lead">Dieselbe Marke auf allem, was Amado nach aussen gibt.</p>
+  <div class="two grid" style="margin-top:var(--s-md)">
+    <div><h3>Visitenkarte</h3>
+      <div class="card-mock">
+        <div class="lg">✕ Barber<br><em>by amado</em></div>
+        <div class="det">
+          <span><i data-lucide="map-pin"></i>Bändlistrasse 29, 8064 Zürich</span>
+          <span><i data-lucide="instagram"></i>@barberbyamado.ch</span>
+          <span><i data-lucide="calendar-check"></i>barberbyamado.ch</span>
+        </div>
+      </div>
+    </div>
+    <div><h3>Instagram-Vorlage</h3>
+      <div class="ig">
+        <div class="tagline">Best Barber in Town</div>
+        <div class="big">Fresh <em>Fade</em></div>
+        <div class="tag" style="border-color:var(--accent);color:var(--accent)">Jetzt buchen</div>
+      </div>
+    </div>
+  </div>
+  <h3 style="margin-top:var(--s-xl)">Promo-Gadgets</h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+    <div class="gadget"><i data-lucide="shirt"></i><div><b>Shirt / Cape</b><br><span>„✕ Barber" klein auf der Brust, gross im Rücken.</span></div></div>
+    <div class="gadget"><i data-lucide="sticker"></i><div><b>Sticker</b><br><span>Rundes „✕", orange auf schwarz.</span></div></div>
+    <div class="gadget"><i data-lucide="credit-card"></i><div><b>Stempelkarte</b><br><span>10 Schnitte, der 10. aufs Haus.</span></div></div>
+    <div class="gadget"><i data-lucide="gift"></i><div><b>Gutschein</b><br><span>Schwarz, orange Zahl, Anton.</span></div></div>
+    <div class="gadget"><i data-lucide="mail"></i><div><b>Mail-Signatur</b><br><span>Name, Rolle, Buchungslink, Lucide-Icons.</span></div></div>
+    <div class="gadget"><i data-lucide="megaphone"></i><div><b>Schaufenster / Plakat</b><br><span>Ein Wort gross, ein CTA, sonst nichts.</span></div></div>
+  </div>
+</div></section>
+
+<footer class="wrap foot">
+  BARBER by amado — Brand System v0.1 · erstellt 2026 · noch in Arbeit, nichts gebaut.<br>
+  Quelle: <code>brand/brandsystem.html</code> · Kurzreferenz: <code>brand/brandguide.md</code>
+</footer>
+
+<script>
+function lin(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function L(h){const n=h.replace('#','');return .2126*lin(parseInt(n.slice(0,2),16))+.7152*lin(parseInt(n.slice(2,4),16))+.0722*lin(parseInt(n.slice(4,6),16))}
+function ratio(a,b){const l1=L(a),l2=L(b);return (Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)}
+function badge(r){const v=r.toFixed(1)+':1';if(r>=7)return['pass','AAA '+v];if(r>=4.5)return['pass','AA '+v];if(r>=3)return['aa','gross '+v];return['fail','✕ '+v]}
+const BG='#000000';
+const toks=[['Grund','#000000','--bg'],['Surface','#141414','--surface'],['Overlay','#1E1E1E','--overlay'],['Border','#2A2A2A','--border'],['Akzent','#EE8B3D','--accent'],['Akzent-Lift','#F5A05C','--accent-lift'],['Text','#F5F2ED','--ink'],['Muted','#A8A29A','--muted'],['Erfolg','#3DCE7A','--ok'],['Warnung','#F5C451','--warn'],['Fehler','#FF6B6B','--err']];
+document.getElementById('tokens').innerHTML=toks.map(t=>{
+  const against = t[1].toUpperCase()==='#000000' ? '#F5F2ED' : BG;
+  const [cls,txt]=badge(ratio(t[1],against));
+  const tc=L(t[1])>.4?'#0A0A0A':'#F5F2ED';
+  return `<div class="sw"><div class="chip" style="background:${t[1]};color:${tc}"><span>${t[0]}</span><span class="badge ${cls}">${txt}</span></div><div class="m"><div class="hex">${t[1].toUpperCase()}</div><div class="nm">${t[2]}</div></div></div>`;
+}).join('');
+const sp=[['xs','.5rem'],['sm','.75rem'],['md','1rem'],['lg','1.5rem'],['xl','2rem'],['2xl','3rem'],['3xl','fluid']];
+document.getElementById('spaces').innerHTML=sp.map(s=>`<div style="display:flex;align-items:center;gap:12px"><code style="min-width:48px">${s[0]}</code><div style="height:14px;background:var(--accent);border-radius:2px;width:${s[1]==='fluid'?'70%':s[1]}"></div><span style="color:var(--faint);font-size:12px">${s[1]}</span></div>`).join('');
+const it=['Fades','Beard','Hot Towel','Taper','Walk-in','Masks','1on1 Training'];
+const line=it.map(i=>`<b>${i}</b>✕`).join(' ');
+document.getElementById('mq').innerHTML=line+' '+line;
+function checkMail(){const f=document.getElementById('mailf'),v=document.getElementById('mail').value;if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){f.classList.add('bad')}else{f.classList.remove('bad')}}
+document.getElementById('mail').addEventListener('input',()=>document.getElementById('mailf').classList.remove('bad'));
+if(window.lucide)lucide.createIcons();
+</script>
+</body>
+</html>

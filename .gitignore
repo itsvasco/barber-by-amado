@@ -1,0 +1,17 @@
+.DS_Store
+*.log
+node_modules/
+
+# Oeffentlich sind nur die fertige Seite (index.html + Konzept 4 + Rechtsseiten)
+# und die Brandguide-Seite (brand/brandsystem.html).
+# Internes Arbeitsmaterial, Entwuerfe und die Design-System-Kopie bleiben lokal.
+/ds/
+/assets/
+/docs/
+brand/brandguide.md
+brand/palette.html
+preview/ds/
+preview/konzept-1.html
+preview/konzept-2.html
+preview/konzept-3.html
+preview/assets/logo/logo-2026.png

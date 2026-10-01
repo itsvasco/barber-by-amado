@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barber &amp; Coiffeur Zürich Altstetten | Barber by Amado</title>
+<meta name="description" content="Barbershop an der Bändlistrasse in Zürich Altstetten. Fade, Bart und Nassrasur vom Profi, 5.0 bei über 400 Bewertungen. Jetzt online Termin buchen.">
+<link rel="canonical" href="https://barberbyamado.ch/">
+<meta property="og:image" content="assets/fresha/location-1.jpg">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#000;--ink:#F5F2ED;--orange:#EE8B3D;--grau:#9A948A;--gruen:#3DCE7A}
+  *{box-sizing:border-box}
+  body{margin:0;background:#050505;color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+  .anton{font-family:Anton,sans-serif;text-transform:uppercase;font-weight:400;line-height:.9}
+  a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+  .cur{color:var(--orange);animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+  .twline{display:block;white-space:nowrap;overflow:hidden;min-height:1em}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .sterne{color:var(--orange);letter-spacing:1px}.gmark{font-weight:700}.gG{color:#4285F4}.go{color:#EA4335}.go2{color:#FBBC05}.gg{color:#34A853}
+  .ico{width:1.1em;height:1.1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  .top{display:flex;align-items:center;justify-content:space-between;padding:.9rem clamp(1rem,3vw,2rem)}
+  .top img{height:26px}
+  .top .lang{color:var(--grau);font-size:.8rem;font-weight:600}
+
+  .bento{display:grid;gap:.7rem;grid-template-columns:repeat(2,1fr);padding:0 clamp(1rem,3vw,2rem) clamp(1rem,3vw,2rem)}
+  @media(min-width:900px){.bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(0,1fr);height:calc(100svh - 64px)}
+    .t-brand{grid-column:span 2;grid-row:span 2}.t-cut{grid-column:span 2;grid-row:span 2}
+    .t-buchen{grid-column:span 2}.t-leist{grid-column:span 2}}
+  .tile{background:#111;border:1px solid #222;border-radius:16px;padding:1.3rem;position:relative;overflow:hidden;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .2s,transform .2s}
+  @media(hover:hover){a.tile:hover{border-color:var(--orange);transform:translateY(-2px)}}
+  .tlabel{font-family:Anton;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--grau)}
+  .tbig{font-family:Anton;text-transform:uppercase;font-size:clamp(1.3rem,2.4vw,2rem);line-height:.95;color:var(--ink)}
+  .o{color:var(--orange)}
+
+  /* Brand */
+  .t-brand{background:#000;grid-column:span 2}
+  .t-brand img.logo{height:34px;margin-bottom:auto}
+  .t-brand .head{font-size:clamp(2.2rem,6vw,4.4rem)}
+  .t-brand .meta{display:flex;gap:.5rem;flex-wrap:wrap;color:var(--grau);font-size:.85rem;align-items:center}
+  /* Cut */
+  .t-cut{padding:0;grid-column:span 2}
+  .t-cut img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .t-cut .cap{position:relative;z-index:2;margin-top:auto;padding:1.1rem;background:linear-gradient(transparent,rgba(0,0,0,.85));width:100%}
+  .t-cut .wm{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:90px;height:32px;background:url('assets/logo/headerlogo.png') center/contain no-repeat;opacity:.7;mix-blend-mode:screen;z-index:2}
+  /* Buchen */
+  .t-buchen{background:linear-gradient(140deg,#FFA24E,var(--orange));color:#0A0A0A;border-color:transparent}
+  .t-buchen .tlabel{color:#5a3410}.t-buchen .tbig{color:#0A0A0A}
+  .t-buchen .go{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;margin-top:.6rem;color:#0A0A0A}
+  /* Rating */
+  .t-rating .num{font-family:Anton;font-size:clamp(2.4rem,4vw,3.4rem);color:var(--orange);line-height:1}
+  /* Hours */
+  .t-hours .status{display:inline-flex;align-items:center;gap:.4rem;color:var(--gruen);font-weight:600;font-size:.9rem}.t-hours .status.zu{color:var(--grau)}.t-hours .status::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+  .t-hours .today{color:var(--grau);font-size:.9rem;margin-top:.3rem}
+  /* Leistungen */
+  .t-leist ul{list-style:none;margin:.4rem 0 0;padding:0;columns:2;column-gap:1rem}
+  .t-leist li{color:var(--ink);font-size:.92rem;padding:.15rem 0}.t-leist li em{color:var(--orange);font-style:normal}
+  /* Standort */
+  .t-map .adr{color:var(--ink);font-weight:500;font-size:.95rem}.t-map .sub{color:var(--grau);font-size:.85rem}
+  /* IG */
+  .t-ig{padding:0}.t-ig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+  .t-ig .cap{position:relative;z-index:2;margin-top:auto;padding:1.1rem;font-weight:600;display:flex;align-items:center;gap:.5rem}
+
+  .strip{padding:clamp(2rem,5vw,3.5rem) clamp(1rem,3vw,2rem);border-top:1px solid #1c1c1c}
+  .strip .grid{display:grid;gap:1.4rem;grid-template-columns:1fr}@media(min-width:760px){.strip .grid{grid-template-columns:repeat(3,1fr)}}
+  .strip h3{font-family:Anton;text-transform:uppercase;font-weight:400;font-size:1.4rem;margin:0 0 .4rem}.strip p{color:var(--grau);margin:0;font-size:.95rem}
+  .strip a.txt{color:var(--orange);font-weight:600}
+  .fuss{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;border-top:1px solid #1c1c1c;margin-top:2rem;padding-top:1.2rem;color:var(--grau);font-size:.82rem}.fuss a{margin-left:.9rem}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.cur{opacity:1}}
+  .wa{position:fixed;right:16px;bottom:16px;z-index:30;width:50px;height:50px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.4)}.wa svg{width:25px;height:25px;color:#fff}
+</style>
+</head>
+<body>
+<h1 class="sr-only">Barber &amp; Coiffeur in Zürich Altstetten</h1>
+
+<div class="top">
+  <a href="#" aria-label="BARBER by amado"><img src="assets/logo/headerlogo.png" alt="BARBER by amado"></a>
+  <span class="lang">DE · EN · ES</span>
+</div>
+
+<div class="bento">
+  <div class="tile t-brand">
+    <img class="logo" src="assets/logo/headerlogo.png" alt="BARBER by amado">
+    <div class="head anton" aria-hidden="true">Zeit für<br><span class="twline"><span class="o" id="tw">einen Fade</span><span class="cur">_</span></span></div>
+    <div class="meta"><span class="sterne">★★★★★</span> <b>5.0</b> · Best Barber in Town · Zürich Altstetten</div>
+  </div>
+
+  <a class="tile t-cut" href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener">
+    <img src="assets/fresha/cut-1.jpg" alt="Fade von BARBER by amado"><span class="wm"></span>
+    <span class="cap"><span class="tlabel">Cuts</span></span>
+  </a>
+
+  <a class="tile t-buchen" href="https://www.fresha.com/a/barber-by-amado-zurich-bandlistrasse-29-d609uc7h" target="_blank" rel="noopener">
+    <span class="tlabel">Termin</span>
+    <span class="tbig">Jetzt buchen<br>schon ab 50.–</span>
+    <span class="go">Über Fresha wählen <svg class="ico" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>
+  </a>
+
+  <div class="tile t-rating">
+    <span class="tlabel"><span class="gmark"><span class="gG">G</span><span class="go2">o</span><span class="go2">o</span><span class="gG">g</span><span class="gg">l</span><span class="go">e</span></span> + Fresha</span>
+    <div class="num">5.0</div>
+    <span style="color:var(--grau);font-size:.85rem">über 440 Bewertungen, fünf Sterne</span>
+  </div>
+
+  <div class="tile t-hours">
+    <span class="tlabel">Öffnungszeiten</span>
+    <div>
+      <span class="status" id="status">Jetzt geöffnet</span>
+      <div class="today" id="today">Heute 10:00 – 19:00</div>
+    </div>
+    <span style="color:var(--grau);font-size:.8rem">Sa Walk-in · Mo + So zu</span>
+  </div>
+
+  <a class="tile t-leist" href="https://www.fresha.com/a/barber-by-amado-zurich-bandlistrasse-29-d609uc7h" target="_blank" rel="noopener">
+    <span class="tlabel">Leistungen</span>
+    <ul>
+      <li>Haar + Styling <em>ab 50.–</em></li>
+      <li>Haar + Bart <em>ab 75.–</em></li>
+      <li>Haar + Maske <em>ab 65.–</em></li>
+      <li>Komplett <em>95.–</em></li>
+      <li>Kopfrasur + Bart <em>ab 50.–</em></li>
+      <li>Bart <em>ab 35.–</em></li>
+    </ul>
+  </a>
+
+  <a class="tile t-map" href="https://maps.google.com/?q=B%C3%A4ndlistrasse+29+8064+Z%C3%BCrich" target="_blank" rel="noopener">
+    <span class="tlabel">Standort</span>
+    <div><div class="adr">Bändlistrasse 29</div><div class="sub">8064 Zürich Altstetten · Parkplätze ums Haus</div></div>
+    <span class="o" style="font-weight:600;font-size:.9rem">Karte öffnen →</span>
+  </a>
+
+  <a class="tile t-ig" href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener">
+    <img src="assets/fresha/cut-8.jpg" alt="Instagram BARBER by amado">
+    <span class="cap"><svg class="ico" viewBox="0 0 24 24" style="width:20px;height:20px"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg> @barberbyamado.ch</span>
+  </a>
+</div>
+
+<div class="strip">
+  <div class="grid">
+    <div><h3>Brais Amado</h3><p>Seit 2009 Coiffeur EFZ, eigener Shop seit 2013 in Lima, seit 2019 an der Bändlistrasse in Zürich Altstetten. Deutsch, Englisch, Spanisch, Portugiesisch, Französisch.</p></div>
+    <div><h3>1-on-1 Training</h3><p>Ein halber Tag, nur du und ich. Fades, Blending, Konturen, Nassrasur. CHF 450. <a class="txt" href="mailto:hallo@barberbyamado.ch?subject=1-on-1%20Training%20Anfrage">Training anfragen</a></p></div>
+    <div><h3>Produkte</h3><p>Pflege von Uppercut Deluxe, nur vor Ort im Studio erhältlich. Samstags Walk-in, sonst online buchen.</p></div>
+  </div>
+  <div class="fuss"><span>© 2026 BARBER by amado</span><span><a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener">Instagram</a><a href="https://m.facebook.com/barberbyamadoswitzerland/" target="_blank" rel="noopener">Facebook</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="agb.html">AGB</a></span></div>
+</div>
+
+<a class="wa" href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5Z"/></svg></a>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HairSalon","name":"BARBER by amado","image":"https://barberbyamado.ch/assets/og.jpg","url":"https://barberbyamado.ch","telephone":"+41764518003","priceRange":"CHF 35–95","address":{"@type":"PostalAddress","streetAddress":"Bändlistrasse 29","postalCode":"8064","addressLocality":"Zürich","addressRegion":"ZH","addressCountry":"CH"},"geo":{"@type":"GeoCoordinates","latitude":47.3889,"longitude":8.4869},"areaServed":"Zürich Altstetten","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"407"},"sameAs":["https://www.instagram.com/barberbyamado.ch/","https://m.facebook.com/barberbyamadoswitzerland/"]}
+</script>
+<script>
+  function schreibmaschine(id,words){const el=document.getElementById(id);if(!el)return;if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=words[0];return}let wi=0,ci=0,del=false;(function t(){const w=words[wi];el.textContent=del?w.slice(0,ci--):w.slice(0,ci++);let d=del?55:95;if(!del&&ci>w.length){del=true;d=1300}else if(del&&ci<0){del=false;ci=0;wi=(wi+1)%words.length;d=350}setTimeout(t,d)})()}
+  schreibmaschine('tw',['einen Fade','den Bart','frisches Styling','die Maske','eine Nassrasur','die Konturen']);
+  (function(){const plan={2:[600,1140],3:[540,1020],4:[600,1140],5:[600,1140],6:[540,900]};const nm=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];const now=new Date(),d=now.getDay(),m=now.getHours()*60+now.getMinutes();const a=plan[d];const st=document.getElementById('status'),to=document.getElementById('today');const fmt=x=>String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0');if(a){to.textContent='Heute '+fmt(a[0])+' – '+fmt(a[1]);if(m>=a[0]&&m<a[1]){st.textContent='Jetzt geöffnet bis '+fmt(a[1])}else{st.textContent='Heute geschlossen';st.classList.add('zu')}}else{st.textContent='Heute geschlossen';st.classList.add('zu');let nd=d,s=0;while(s<7){nd=(nd+1)%7;if(plan[nd])break;s++}to.textContent='Öffnet '+nm[nd]+' '+fmt(plan[nd][0])}})();
+</script>
+</body>
+</html>

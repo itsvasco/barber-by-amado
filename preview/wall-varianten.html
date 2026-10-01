@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bewertungs-Wand · zwei Varianten</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#000;--ink:#F5F2ED;--orange:#EE8B3D;--grau:#9A948A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .anton{font-family:Anton,sans-serif;text-transform:uppercase;font-weight:400;line-height:.9}
+  .o{color:var(--orange)}
+  .wrap{max-width:74rem;margin-inline:auto;padding-inline:clamp(1.2rem,5vw,4rem);width:100%}
+
+  /* Kopf des Wahlblatts */
+  .top{padding:3rem 0 1.5rem;border-bottom:1px solid #1c1c1c}
+  .top h1{font-family:Anton;text-transform:uppercase;font-size:clamp(1.8rem,5vw,3rem);margin:0 0 .5rem}
+  .top p{color:var(--grau);max-width:52ch;margin:.2rem 0}
+  .code{display:inline-block;font-family:Anton;background:var(--orange);color:#0A0A0A;border-radius:7px;padding:.1rem .6rem;font-size:1.1rem;vertical-align:.05em}
+
+  .abschnitt{padding:3.2rem 0 4rem;border-bottom:1px solid #141414}
+  .abschnitt__kopf{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem}
+  .abschnitt h2{font-family:Anton;text-transform:uppercase;font-size:clamp(1.4rem,3.6vw,2.2rem);margin:0}
+  .abschnitt .hinweis{color:var(--grau);font-size:.95rem;max-width:56ch;margin:.2rem 0 1.6rem}
+
+  .badges{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.6rem}
+  .gbadge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(0,0,0,.55);border:1px solid #2a2a2a;border-radius:999px;padding:.38rem .8rem;font-size:.8rem}
+  .sterne{color:var(--orange);letter-spacing:1px}
+  .gmark{font-weight:700}.gG{color:#4285F4}.go{color:#EA4335}.go2{color:#FBBC05}.gg{color:#34A853}
+
+  /* ---------- gemeinsame Kachel ---------- */
+  .kachel{position:relative;perspective:1200px;min-height:120px}
+  .kachel__in{position:relative;width:100%;height:100%;min-height:inherit;transition:transform .8s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+  .kachel.um .kachel__in{} /* Flip-Zustand per JS gesetzt */
+  .face{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;gap:.6rem;
+        padding:1.1rem 1.2rem;border:1px solid #262626;border-radius:16px;background:rgba(255,255,255,.035);
+        backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+  .face--zitat blockquote{margin:0;font-size:clamp(.98rem,1.5vw,1.18rem);font-weight:500;line-height:1.3}
+  .face--fakt{align-items:flex-start;justify-content:center;gap:.2rem}
+  .face--fakt .gross{font-family:Anton;text-transform:uppercase;color:var(--orange);font-size:clamp(1.8rem,4.5vw,3rem);line-height:.95}
+  .face--fakt .klein{color:var(--grau);font-size:.85rem;letter-spacing:.04em;text-transform:uppercase}
+  .quelle{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--grau)}
+  .quelle .sterne{font-size:.72rem}
+
+  /* grössere Kacheln bekommen grösseren Text */
+  .kachel.gross .face--zitat blockquote{font-size:clamp(1.15rem,2vw,1.6rem)}
+  .kachel.gross .face--fakt .gross{font-size:clamp(2.4rem,6vw,4rem)}
+
+  /* ---------- F1: Flip-Wall, viele kleine Kacheln, eigene Takte ---------- */
+  .wallF1{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;grid-auto-rows:130px}
+  .wallF1 .kachel{min-height:0;height:100%}
+  .wallF1 .s-bb{grid-column:span 2;grid-row:span 2}
+  .wallF1 .s-w{grid-column:span 2}
+  .wallF1 .s-t{grid-row:span 2}
+  @media(max-width:760px){.wallF1{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px}.wallF1 .s-bb{grid-column:span 2}.wallF1 .s-w{grid-column:span 2}.wallF1 .s-t{grid-row:span 1}}
+
+  /* ---------- F2: Rotations-Wand, wenige grosse Kacheln, Diagonal-Welle, tiefer 3D ---------- */
+  .wallF2{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;grid-auto-rows:190px;perspective:1600px}
+  .wallF2 .kachel{min-height:0;height:100%;perspective:none}
+  .wallF2 .kachel__in{transition:transform 1s cubic-bezier(.65,0,.2,1)}
+  .wallF2 .face{border-radius:18px;background:rgba(255,255,255,.045);border-color:#2e2e2e;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+  .wallF2 .b-bb{grid-column:span 2;grid-row:span 2}
+  .wallF2 .b-w{grid-column:span 2}
+  @media(max-width:760px){.wallF2{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}.wallF2 .b-bb{grid-column:span 2}.wallF2 .b-w{grid-column:span 2}}
+
+  @media(prefers-reduced-motion:reduce){.kachel__in{transition:none}}
+  .fuss{color:var(--grau);font-size:.85rem;padding:2rem 0 3rem}
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <h1>Bewertungs-Wand <span class="o">· zwei Varianten</span></h1>
+  <p>Jede Kachel dreht für sich, zeigt dann einen anderen Eintrag und hält ihn rund 5 Sekunden. Antworte mit dem Kürzel: <span class="code">F1</span> oder <span class="code">F2</span>.</p>
+  <p style="font-size:.85rem;margin-top:1rem">Inhalt: die 4 echten Stimmen plus wahre Fakten-Kacheln (★ 5.0, 440+ Bewertungen, seit 2019). Weitere echte Zitate holst du später von Google/Fresha nach, die Mechanik bleibt gleich.</p>
+</div>
+
+<!-- ============ F1 ============ -->
+<section class="abschnitt"><div class="wrap">
+  <div class="abschnitt__kopf"><span class="code">F1</span><h2>Flip-Wall</h2></div>
+  <p class="hinweis">Viele kleine Kacheln, jede im eigenen Takt. Einige klappen nach oben, andere drehen nach links. Dichtes, lebendiges Feld.</p>
+  <div class="badges">
+    <span class="gbadge"><span class="gmark"><span class="gG">G</span><span class="go">o</span><span class="go2">o</span><span class="gG">g</span><span class="gg">l</span><span class="go">e</span></span> <span class="sterne">★★★★★</span> <b>5.0</b></span>
+    <span class="gbadge"><b class="o">Fresha</b> <span class="sterne">★★★★★</span> <b>5.0</b></span>
+  </div>
+  <div class="wallF1" id="wallF1" aria-label="Kundenstimmen"></div>
+</div></section>
+
+<!-- ============ F2 ============ -->
+<section class="abschnitt"><div class="wrap">
+  <div class="abschnitt__kopf"><span class="code">F2</span><h2>Rotations-Wand</h2></div>
+  <p class="hinweis">Wenige grosse Kacheln, tiefere Drehung, als Welle über die Diagonale. Ruhiger, hochwertiger, weniger Casino.</p>
+  <div class="badges">
+    <span class="gbadge"><span class="gmark"><span class="gG">G</span><span class="go">o</span><span class="go2">o</span><span class="gG">g</span><span class="gg">l</span><span class="go">e</span></span> <span class="sterne">★★★★★</span> <b>5.0</b></span>
+    <span class="gbadge"><b class="o">Fresha</b> <span class="sterne">★★★★★</span> <b>5.0</b></span>
+  </div>
+  <div class="wallF2" id="wallF2" aria-label="Kundenstimmen"></div>
+</div></section>
+
+<div class="wrap fuss">Vorschau · Barber by Amado · interne Variantenwahl</div>
+
+<script>
+(function(){
+  // Quelle der Einträge: 4 echte Stimmen + wahre Fakten. Keine erfundenen Kundensätze.
+  const G = '<span class="gmark"><span class="gG">G</span><span class="go">o</span><span class="go2">o</span><span class="gG">g</span><span class="gg">l</span><span class="go">e</span></span>';
+  const stern = '<span class="sterne">★★★★★</span>';
+  const quelle = {
+    google: '<span class="quelle">'+G+' '+stern+'</span>',
+    fresha: '<span class="quelle"><b class="o" style="font-size:.78rem">Fresha</b> '+stern+'</span>'
+  };
+  const pool = [
+    {t:'zitat', text:'„Pünktlich, sehr professionell und <span class="o">äusserst freundlich</span>."', q:'google'},
+    {t:'fakt',  gross:'5.0', klein:'Google · über 440 Bewertungen'},
+    {t:'zitat', text:'„A great professional with <span class="o">so much experience and talent</span>!"', q:'google'},
+    {t:'fakt',  gross:'★★★★★', klein:'durchweg Spitzennoten'},
+    {t:'zitat', text:'„The <span class="o">best barber</span> in town!!"', q:'google'},
+    {t:'fakt',  gross:'2019', klein:'seit · an der Bändlistrasse'},
+    {t:'zitat', text:'„Bester Barber in Zürich. <span class="o">Qualität und Professionalität</span>."', q:'fresha'},
+    {t:'fakt',  gross:'440+', klein:'mal fünf Sterne'},
+    {t:'fakt',  gross:'Zürich', klein:'Altstetten · Bändlistrasse 29'}
+  ];
+
+  function render(item){
+    if(item.t==='zitat'){
+      return '<blockquote>'+item.text+'</blockquote>'+quelle[item.q];
+    }
+    return '<span class="gross">'+item.gross+'</span><span class="klein">'+item.klein+'</span>';
+  }
+  function fill(face,item){ face.className = item.t==='zitat' ? 'face face--zitat' : 'face face--fakt'; face.innerHTML = render(item); }
+
+  // Baut eine Kachel mit zwei Flächen, fester Achse und eigenem Zustand.
+  // Fläche A liegt bei 0°, Fläche B bei 180°; nur der Container dreht.
+  function baueKachel(startIdx, extraKlasse, achse){
+    const k = document.createElement('div');
+    k.className = 'kachel ' + (extraKlasse||'');
+    const inn = document.createElement('div'); inn.className='kachel__in';
+    const a = document.createElement('div');
+    const b = document.createElement('div');
+    a.style.transform = 'rotate'+achse+'(0deg)';
+    b.style.transform = 'rotate'+achse+'(180deg)';
+    inn.appendChild(a); inn.appendChild(b); k.appendChild(inn);
+    k.__faces = [a,b]; k.__i = startIdx; k.__n = 0; k.__achse = achse;
+    fill(a, pool[startIdx]);
+    fill(b, pool[(startIdx+1)%pool.length]);
+    return k;
+  }
+
+  // Ein Dreh-Schritt: die gerade weggedrehte Fläche mit dem nächsten Eintrag füllen,
+  // dann den Container um weitere 180° weiterdrehen (immer dieselbe Richtung = ruhig).
+  function schritt(k){
+    k.__n++;
+    const next = (k.__i + 1) % pool.length;
+    const sichtbar = k.__faces[k.__n % 2];   // wird nach diesem Flip gelesen, ist jetzt noch verdeckt
+    fill(sichtbar, pool[next]);
+    k.querySelector('.kachel__in').style.transform = 'rotate'+k.__achse+'('+(k.__n*180)+'deg)';
+    k.__i = next;
+  }
+
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // ---- F1: viele Kacheln, gemischte Achsen, eigene Startversätze ----
+  (function(){
+    const wall = document.getElementById('wallF1');
+    // Grössen- und Achsen-Muster für 8 Kacheln
+    const plan = [
+      {kl:'s-bb gross', ax:'X'},
+      {kl:'',           ax:'Y'},
+      {kl:'s-t',        ax:'X'},
+      {kl:'',           ax:'Y'},
+      {kl:'s-w',        ax:'X'},
+      {kl:'',           ax:'Y'},
+      {kl:'',           ax:'X'},
+      {kl:'',           ax:'Y'}
+    ];
+    const kacheln = plan.map((p,idx)=>{
+      const k = baueKachel(idx % pool.length, p.kl, p.ax);
+      wall.appendChild(k);
+      return k;
+    });
+    if(reduce) return;
+    kacheln.forEach((k,idx)=>{
+      const versatz = idx * (5000/kacheln.length); // gleichmässig verteilt -> harmonisch
+      setTimeout(()=>{ schritt(k); setInterval(()=>schritt(k), 5000); }, versatz);
+    });
+  })();
+
+  // ---- F2: wenige grosse Kacheln, Diagonal-Welle ----
+  (function(){
+    const wall = document.getElementById('wallF2');
+    const plan = [
+      {kl:'b-bb gross', ax:'Y', pos:0},
+      {kl:'',           ax:'Y', pos:1},
+      {kl:'',           ax:'X', pos:1},
+      {kl:'b-w',        ax:'Y', pos:2},
+      {kl:'',           ax:'X', pos:2}
+    ];
+    const kacheln = plan.map((p,idx)=>{
+      const k = baueKachel((idx*2) % pool.length, p.kl, p.ax);
+      k.__pos = p.pos;
+      wall.appendChild(k);
+      return k;
+    });
+    if(reduce) return;
+    kacheln.forEach(k=>{
+      const versatz = 600 + k.__pos * 900;      // Welle über die Diagonale
+      setTimeout(()=>{ schritt(k); setInterval(()=>schritt(k), 5000); }, versatz);
+    });
+  })();
+})();
+</script>
+</body>
+</html>
