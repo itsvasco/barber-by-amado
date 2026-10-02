@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BARBER by amado | Best Barber in Town</title>
+<meta name="description" content="Barbershop an der Bändlistrasse 29 in Zürich Altstetten. Haarschnitt, Bart und Nassrasur vom Profi. 5.0 bei über 400 Bewertungen. Jetzt online buchen.">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Marken-Tokens aus dem Design System (Amado dark). Farbe nur mit Bedeutung. */
+  :root{color-scheme:dark;--bg:#000;--ink:#F5F2ED;--orange:#EE8B3D;--grau:#9A948A;--linie:#222}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .anton{font-family:Anton,sans-serif;text-transform:uppercase;font-weight:400;line-height:.92}
+  .o{color:var(--orange)}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:72rem;margin-inline:auto;padding-inline:clamp(1.2rem,5vw,4rem);width:100%}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;letter-spacing:.02em;border-radius:999px;padding:0 1.6rem;height:3rem;white-space:nowrap;border:2px solid transparent;cursor:pointer;transition:transform .12s,background .12s,border-color .12s;font-family:Inter;font-size:1rem}
+  .btn:active{transform:translateY(1px)}
+  .btn--o{background:var(--orange);color:#0A0A0A}
+  .btn--geist{background:rgba(255,255,255,.06);border-color:#444;color:var(--ink)}
+  .btn--lg{height:3.6rem;font-size:1.1rem;padding:0 2.2rem}
+  .btn--klein{height:2.5rem;font-size:.9rem;padding:0 1.1rem}
+  @media(hover:hover){.btn--o:hover{background:#FFA24E}.btn--geist:hover{border-color:var(--orange);color:var(--orange)}}
+  .ico{width:1.1em;height:1.1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .sterne{color:var(--orange);letter-spacing:2px}
+
+  /* Kopf */
+  .kopf{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(0,0,0,.72);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+  .kopf.solid{background:rgba(5,5,5,.95);border-bottom-color:var(--linie)}
+  .kopf__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:62px;padding-inline:clamp(1.2rem,5vw,4rem)}
+  .kopf img{height:28px;width:auto}
+  .kopf nav{display:none;gap:1.6rem;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+  .kopf nav a{color:var(--grau)}
+  @media(hover:hover){.kopf nav a:hover{color:var(--orange)}}
+  @media(min-width:900px){.kopf nav{display:flex}}
+
+  /* Hero: Vollbild-Foto, zentrierter BOOK NOW, 1:1 wie bisher */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+  .hero__bg{position:absolute;inset:0;background:#000 center/cover no-repeat;filter:grayscale(.25) brightness(.5);z-index:0}
+  .hero__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.2) 45%,rgba(0,0,0,.85));z-index:1}
+  .hero__in{position:relative;z-index:2;padding:6rem 1.2rem}
+  .hero__wort{font-size:clamp(2.6rem,9vw,6rem);margin:0 0 1.6rem;letter-spacing:.01em}
+  .hero__wort small{display:block;font-family:Inter;font-weight:600;text-transform:none;letter-spacing:.02em;font-size:clamp(.95rem,2.4vw,1.15rem);color:var(--grau);margin-top:1rem;line-height:1.5}
+
+  /* Bewertungs-Streifen */
+  .rate{border-block:1px solid var(--linie);text-align:center;padding:1.1rem 1.2rem;font-size:1rem}
+  .rate b{font-weight:700}
+  .rate .grau{color:var(--grau)}
+
+  /* Abschnitt */
+  .sec{padding:clamp(3.5rem,8vw,6rem) 0}
+  .sec__kopf{text-align:center;margin-bottom:2.6rem}
+  .sec__kopf h2{font-family:Anton;text-transform:uppercase;font-size:clamp(1.8rem,5vw,3rem);margin:0}
+  .sec__kopf p{color:var(--grau);max-width:46ch;margin:1rem auto 0}
+
+  /* Services: 2x2 Raster */
+  .services{display:grid;grid-template-columns:1fr;gap:1rem}
+  @media(min-width:680px){.services{grid-template-columns:1fr 1fr}}
+  .svc{border:1px solid var(--linie);border-radius:14px;background:rgba(255,255,255,.035);padding:1.6rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .2s,transform .2s}
+  @media(hover:hover){.svc:hover{border-color:var(--orange);transform:translateY(-3px)}}
+  .svc__nr{font-family:Anton;text-transform:uppercase;letter-spacing:.18em;color:var(--orange);font-size:.85rem}
+  .svc__name{font-family:Anton;text-transform:uppercase;font-size:1.5rem}
+  .svc__det{color:var(--grau);font-size:.95rem}
+  .svc__preis{margin-top:.2rem;font-weight:700;font-size:1.1rem}
+  .svc__preis span{color:var(--grau);font-weight:400;font-size:.85rem}
+
+  .mitte{text-align:center;margin-top:2.4rem}
+
+  /* Instagram-Band */
+  .insta{text-align:center}
+  .insta h2{font-family:Anton;text-transform:uppercase;font-size:clamp(2rem,7vw,4.5rem);margin:0 0 2rem;line-height:.9}
+  .iggrid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+  @media(min-width:560px){.iggrid{grid-template-columns:repeat(3,1fr)}}
+  @media(min-width:900px){.iggrid{grid-template-columns:repeat(4,1fr)}}
+  .iggrid a{position:relative;aspect-ratio:1;overflow:hidden;border-radius:6px}
+  .iggrid img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .4s;filter:grayscale(.1)}
+  @media(hover:hover){.iggrid a:hover img{transform:scale(1.06);filter:none}}
+
+  /* Owner */
+  .owner{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
+  @media(min-width:820px){.owner{grid-template-columns:.9fr 1.1fr;gap:3rem}}
+  .owner__foto{border-radius:14px;overflow:hidden;background:#111}
+  .owner__foto img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+  .owner h2{font-family:Anton;text-transform:uppercase;font-size:clamp(1.8rem,5vw,2.8rem);margin:0}
+  .owner .rolle{color:var(--orange);font-family:Anton;text-transform:uppercase;letter-spacing:.16em;font-size:.85rem;margin:.3rem 0 1.4rem}
+  .owner p{color:#D8D3C9;margin:0 0 1rem}
+  .owner p:last-child{color:var(--grau)}
+
+  /* Footer */
+  .fuss{border-top:1px solid var(--linie);padding:clamp(3rem,7vw,5rem) 0 2.5rem;text-align:center}
+  .fuss__logo{height:34px;margin:0 auto 2rem}
+  .zeiten{display:grid;gap:.35rem;max-width:22rem;margin:0 auto 2.2rem;font-size:1rem}
+  .zeile{display:flex;justify-content:space-between;gap:1rem;padding:.2rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .zeile span:first-child{color:var(--grau)}
+  .zeile.zu span:last-child{color:var(--grau)}
+  .kontakt{display:grid;gap:.4rem;margin-bottom:2rem;color:#D8D3C9}
+  .kontakt a{color:#D8D3C9}
+  @media(hover:hover){.kontakt a:hover{color:var(--orange)}}
+  .park{display:inline-flex;align-items:center;gap:.4rem;justify-content:center;color:var(--grau)}.park .ico{color:var(--orange)}
+  .sozial{display:flex;gap:.6rem;justify-content:center;margin-bottom:2rem}
+  .sozial a{width:42px;height:42px;border:1px solid #333;border-radius:9px;display:grid;place-items:center;color:var(--ink)}
+  @media(hover:hover){.sozial a:hover{border-color:var(--orange);color:var(--orange)}}
+  .copy{color:var(--grau);font-size:.85rem;letter-spacing:.04em}
+
+  /* WhatsApp-Taste wie bisher */
+  .wa{position:fixed;right:16px;bottom:16px;z-index:50;width:52px;height:52px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+  .wa svg{width:26px;height:26px;color:#fff}
+
+  /* ruhige Einblendung beim Scrollen */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+  .rv.da{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<header class="kopf" id="kopf"><div class="kopf__in">
+  <a href="#top" aria-label="BARBER by amado"><img src="assets/logo/headerlogo.png" alt="BARBER by amado"></a>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#insta">Insta</a>
+    <a href="#owner">Owner</a>
+    <a href="#kontakt">Contact</a>
+    <a href="training.html">Training</a>
+  </nav>
+  <a class="btn btn--o btn--klein" href="https://www.fresha.com/a/barber-by-amado-zurich-bandlistrasse-29-d609uc7h" target="_blank" rel="noopener">BOOK NOW</a>
+</div></header>
+
+<main id="top">
+  <h1 class="sr-only">BARBER by amado · Barber und Coiffeur in Zürich Altstetten</h1>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__bg" style="background-image:url('assets/fresha/location-1.jpg')"></div>
+    <div class="hero__veil"></div>
+    <div class="hero__in">
+      <h2 class="anton hero__wort">BARBER<br>by amado
+        <small>Best Barber in Town · Bändlistrasse 29, Zürich Altstetten</small>
+      </h2>
+      <a class="btn btn--o btn--lg" href="https://www.fresha.com/a/barber-by-amado-zurich-bandlistrasse-29-d609uc7h" target="_blank" rel="noopener">BOOK NOW</a>
+    </div>
+  </section>
+
+  <!-- Bewertung -->
+  <div class="rate"><span class="sterne">★★★★★</span> <b>5.0</b> <span class="grau">(399 Bewertungen)</span></div>
+
+  <!-- Services -->
+  <section class="sec" id="services"><div class="wrap">
+    <div class="sec__kopf rv">
+      <h2>Services</h2>
+      <p>Buche noch heute deinen Termin und erlebe die BARBER by amado Experience.</p>
+    </div>
+    <div class="services">
+      <article class="svc rv">
+        <div class="svc__nr">Service 1</div>
+        <div class="svc__name">Haar + Styling</div>
+        <div class="svc__det">45 Min.</div>
+        <div class="svc__preis"><span>ab</span> CHF 50</div>
+      </article>
+      <article class="svc rv">
+        <div class="svc__nr">Service 2</div>
+        <div class="svc__name">Haar + Bart</div>
+        <div class="svc__det">75 Min.</div>
+        <div class="svc__preis"><span>ab</span> CHF 75</div>
+      </article>
+      <article class="svc rv">
+        <div class="svc__nr">Service 3</div>
+        <div class="svc__name">Haar + Maske</div>
+        <div class="svc__det">60 Min.</div>
+        <div class="svc__preis"><span>ab</span> CHF 65</div>
+      </article>
+      <article class="svc rv">
+        <div class="svc__nr">Service 4</div>
+        <div class="svc__name">Haar + Bart + Maske</div>
+        <div class="svc__det">90 Min.</div>
+        <div class="svc__preis">CHF 95</div>
+      </article>
+    </div>
+    <div class="mitte">
+      <a class="btn btn--o btn--lg" href="https://www.fresha.com/a/barber-by-amado-zurich-bandlistrasse-29-d609uc7h" target="_blank" rel="noopener">BOOK NOW</a>
+    </div>
+  </div></section>
+
+  <!-- Instagram -->
+  <section class="sec insta" id="insta"><div class="wrap">
+    <h2 class="rv">Follow us<br>on <span class="o">Insta</span></h2>
+    <div class="iggrid">
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-09.jpg" alt="Haarschnitt bei BARBER by amado" loading="lazy"></a>
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-02.jpg" alt="Kopfrasur bei BARBER by amado" loading="lazy"></a>
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-03.jpg" alt="Fade bei BARBER by amado" loading="lazy"></a>
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-04.jpg" alt="Styling bei BARBER by amado" loading="lazy"></a>
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-05.jpg" alt="Bart bei BARBER by amado" loading="lazy"></a>
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-06.jpg" alt="Haarschnitt bei BARBER by amado" loading="lazy"></a>
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-07.jpg" alt="Komplettservice bei BARBER by amado" loading="lazy"></a>
+      <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener"><img src="assets/instagram/ig-08.jpg" alt="Bart bei BARBER by amado" loading="lazy"></a>
+    </div>
+    <div class="mitte">
+      <a class="btn btn--geist" href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener">@barberbyamado.ch</a>
+    </div>
+  </div></section>
+
+  <!-- Owner -->
+  <section class="sec" id="owner"><div class="wrap">
+    <div class="owner">
+      <div class="owner__foto rv"><img src="assets/fresha/amado.jpg" alt="Brais Amado, Owner von BARBER by amado"></div>
+      <div class="rv">
+        <h2>Brais Amado</h2>
+        <div class="rolle">Owner</div>
+        <p>Seit 2009 ausgebildeter Coiffeur EFZ in der Schweiz.</p>
+        <p>2013 eröffnete Brais Amado seinen ersten Barber Shop in Lima, Peru, der bis heute erfolgreich besteht. Nach mehreren Jahren internationaler Erfahrung ist er seit 2019 mit BARBER by amado an der Bändlistrasse 29 in Zürich tätig.</p>
+        <p>Präzise Haarschnitte, professionelle Bartpflege und persönliche Beratung in Deutsch, Englisch und Spanisch.</p>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<!-- Footer -->
+<footer class="fuss" id="kontakt"><div class="wrap">
+  <img class="fuss__logo" src="assets/logo/headerlogo.png" alt="BARBER by amado">
+  <div class="zeiten">
+    <div class="zeile zu"><span>Montag</span><span>geschlossen</span></div>
+    <div class="zeile"><span>Dienstag</span><span>10:00 – 19:00</span></div>
+    <div class="zeile"><span>Mittwoch</span><span>09:00 – 17:00</span></div>
+    <div class="zeile"><span>Donnerstag</span><span>10:00 – 19:00</span></div>
+    <div class="zeile"><span>Freitag</span><span>10:00 – 19:00</span></div>
+    <div class="zeile"><span>Samstag</span><span>09:00 – 15:00</span></div>
+    <div class="zeile zu"><span>Sonntag</span><span>geschlossen</span></div>
+  </div>
+  <div class="kontakt">
+    <div>Telefon: <a href="tel:+41764518003">+41 76 451 80 03</a></div>
+    <div>E-Mail: <a href="mailto:byamado@hotmail.com">byamado@hotmail.com</a></div>
+    <div>Instagram: <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener">@barberbyamado.ch</a></div>
+    <div>Bändlistrasse 29, 8064 Zürich Altstetten</div>
+    <div class="park"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg> Gratis Parkplätze gleich ums Haus</div>
+  </div>
+  <div class="sozial">
+    <a href="https://m.facebook.com/barberbyamadoswitzerland/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="ico" viewBox="0 0 24 24"><path d="M15 3h-3a4 4 0 0 0-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3Z"/></svg></a>
+    <a href="https://www.instagram.com/barberbyamado.ch/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+  </div>
+  <div class="copy">© 2026 BARBER by amado</div>
+</div></footer>
+
+<a class="wa" href="https://wa.me/41764518003" target="_blank" rel="noopener" aria-label="WhatsApp schreiben"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5Z"/></svg></a>
+
+<script>
+  // Kopf wird fest, sobald man scrollt
+  const kopf=document.getElementById('kopf');
+  const aufScroll=()=>kopf.classList.toggle('solid',window.scrollY>40);
+  aufScroll(); addEventListener('scroll',aufScroll,{passive:true});
+
+  // ruhige Einblendung; funktioniert beim Rauf- und Runterscrollen
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('da'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
